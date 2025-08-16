@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viva Preparation Study App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#667eea',
+                        secondary: '#764ba2'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .question-gradient {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+        
+        .answer-gradient {
+            background: linear-gradient(45deg, #10b981, #059669);
+        }
+        
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .prose h1, .prose h2, .prose h3 {
+            color: #1f2937;
+            font-weight: 700;
+        }
+        
+        .prose h3 {
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        .prose strong {
+            color: #374151;
+            font-weight: 600;
+        }
+        
+        .prose ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        
+        .prose ol {
+            list-style-type: decimal;
+            margin-left: 1.5rem;
+        }
+        
+        .prose li {
+            margin: 0.5rem 0;
+        }
+        
+        .prose code {
+            background: #f3f4f6;
+            color: #dc2626;
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+        }
+        
+        /* Custom responsive styles */
+        @media (max-width: 768px) {
+            .mobile-stack {
+                flex-direction: column;
+            }
+            
+            .mobile-full-width {
+                width: 100%;
+            }
+            
+            .mobile-text-center {
+                text-align: center;
+            }
+            
+            .mobile-hidden {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .mobile-p-2 {
+                padding: 0.5rem;
+            }
+            
+            .mobile-text-sm {
+                font-size: 0.875rem;
+            }
+            
+            .mobile-mb-2 {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen font-sans">
+    <!-- Home View -->
+    <div id="homeView" class="min-h-screen flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-white rounded-3xl shadow-2xl p-4 sm:p-6 lg:p-8 max-w-4xl w-full mx-2 sm:mx-4">
+            <div class="text-center mb-6 sm:mb-8">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-2">
+                    <i class="fas fa-graduation-cap text-primary mr-2 sm:mr-3"></i>
+                    <span class="block sm:inline">Viva Preparation Study App</span>
+                </h1>
+                <p class="text-gray-600 text-base sm:text-lg">Master your MAD concepts with structured learning</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                <div class="subject-card bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-transparent hover:border-blue-300 rounded-2xl p-4 sm:p-6 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl" onclick="loadSubject('mad1')">
+                    <div class="text-center">
+                        <i class="fas fa-code text-4xl sm:text-5xl text-blue-600 mb-3 sm:mb-4"></i>
+                        <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2">MAD1 Questions</h3>
+                        <p class="text-sm sm:text-base text-gray-600">Modern Application Development I concepts and questions</p>
+                    </div>
+                </div>
+                
+                <div class="subject-card bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-transparent hover:border-purple-300 rounded-2xl p-4 sm:p-6 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl" onclick="loadSubject('mad2')">
+                    <div class="text-center">
+                        <i class="fas fa-laptop-code text-4xl sm:text-5xl text-purple-600 mb-3 sm:mb-4"></i>
+                        <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2">MAD2 Questions</h3>
+                        <p class="text-sm sm:text-base text-gray-600">Advanced web development with Vue.js, Flask, and more</p>
+                    </div>
+                </div>
+                
+                <div class="subject-card bg-gradient-to-br from-green-50 to-green-100 border-2 border-transparent hover:border-green-300 rounded-2xl p-4 sm:p-6 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl sm:col-span-2 lg:col-span-1" onclick="loadSubject('tips')">
+                    <div class="text-center">
+                        <i class="fas fa-lightbulb text-4xl sm:text-5xl text-green-600 mb-3 sm:mb-4"></i>
+                        <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2">Tips & Tricks</h3>
+                        <p class="text-sm sm:text-base text-gray-600">Helpful tips and strategies for viva preparation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Study View -->
+    <div id="studyView" class="hidden min-h-screen">
+        <!-- Header with Navigation -->
+        <div class="bg-white shadow-lg">
+            <div class="max-w-7xl mx-auto px-2 sm:px-4 py-3 sm:py-4">
+                <div class="flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0">
+                    <h1 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 text-center sm:text-left">
+                        <i class="fas fa-graduation-cap text-primary mr-1 sm:mr-2"></i>
+                        <span class="hidden sm:inline">Viva Preparation</span>
+                        <span class="sm:hidden">Viva Prep</span>
+                    </h1>
+                    
+                    <div class="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto justify-center">
+                        <button onclick="loadSubject('mad1')" class="nav-tab px-2 sm:px-4 py-2 rounded-lg transition-all duration-300 text-sm sm:text-base">MAD1</button>
+                        <button onclick="loadSubject('mad2')" class="nav-tab px-2 sm:px-4 py-2 rounded-lg transition-all duration-300 text-sm sm:text-base">MAD2</button>
+                        <button onclick="loadSubject('tips')" class="nav-tab px-2 sm:px-4 py-2 rounded-lg transition-all duration-300 text-sm sm:text-base">Tips</button>
+                        <button onclick="goHome()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-2 sm:px-4 py-2 rounded-lg transition-all duration-300 text-sm sm:text-base">
+                            <i class="fas fa-home mr-1"></i> 
+                            <span class="hidden sm:inline">Home</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="mt-3 sm:mt-4 bg-gray-200 rounded-full h-2">
+                    <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+                
+                <!-- Stats -->
+                <div class="mt-3 sm:mt-4 flex justify-center space-x-4 sm:space-x-8">
+                    <div class="text-center">
+                        <div id="currentQuestion" class="text-lg sm:text-xl lg:text-2xl font-bold text-blue-600">0</div>
+                        <div class="text-xs sm:text-sm text-gray-500">Current</div>
+                    </div>
+                    <div class="text-center">
+                        <div id="totalQuestions" class="text-lg sm:text-xl lg:text-2xl font-bold text-purple-600">0</div>
+                        <div class="text-xs sm:text-sm text-gray-500">Total</div>
+                    </div>
+                    <div class="text-center">
+                        <div id="currentSection" class="text-sm sm:text-base lg:text-lg font-semibold text-green-600 truncate max-w-24 sm:max-w-none">-</div>
+                        <div class="text-xs sm:text-sm text-gray-500">Section</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content Area -->
+        <div class="max-w-7xl mx-auto p-2 sm:p-4 pb-16 sm:pb-24">
+            <!-- Section Selection for MAD1/MAD2 -->
+            <div id="sectionGrid" class="hidden mb-4 sm:mb-6">
+                <h2 class="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 text-center px-2">Choose a Section to Study</h2>
+                <div id="sectionButtons" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 px-2"></div>
+            </div>
+            
+            <!-- Question and Answer Display -->
+            <div id="questionAnswerCard" class="hidden">
+                <div class="bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden mx-2 sm:mx-0">
+                    <!-- Question Section -->
+                    <div class="question-gradient text-white p-4 sm:p-6">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 sm:mb-4 space-y-3 sm:space-y-0">
+                            <span id="questionNumber" class="bg-white bg-opacity-20 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold">Question 1</span>
+                            <div class="flex items-center space-x-3 sm:space-x-4 self-end sm:self-auto">
+                                <button id="prevBtn" onclick="previousQuestion()" class="bg-white bg-opacity-20 hover:bg-opacity-30 p-2 rounded-full transition-all duration-300" disabled>
+                                    <i class="fas fa-chevron-left text-sm sm:text-base"></i>
+                                </button>
+                                <button id="nextBtn" onclick="nextQuestion()" class="bg-white bg-opacity-20 hover:bg-opacity-30 p-2 rounded-full transition-all duration-300">
+                                    <i class="fas fa-chevron-right text-sm sm:text-base"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="questionText" class="text-base sm:text-lg font-medium leading-relaxed">Select a subject to start studying...</div>
+                    </div>
+                    
+                    <!-- Answer Section -->
+                    <div class="answer-gradient text-white p-4 sm:p-6">
+                        <div class="flex items-center mb-3 sm:mb-4">
+                            <i class="fas fa-lightbulb mr-2"></i>
+                            <span class="font-semibold text-sm sm:text-base">Answer</span>
+                        </div>
+                        <div id="answerText" class="text-sm sm:text-base leading-relaxed">Answer will appear here...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tips Content Display -->
+            <div id="tipsContent" class="hidden">
+                <div class="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 mx-2 sm:mx-0">
+                    <div class="prose prose-sm sm:prose-base lg:prose-lg max-w-none" id="tipsText">
+                        Loading tips content...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
