@@ -26,8 +26,6 @@ Questions and content compiled from:
 
 - **MAD I** (BSCS2003): 4 credits, web application fundamentals
 - **MAD II** (BSCS2006): 4 credits, advanced web development concepts
-- **Duration**: 1-2 years, 15 hrs/week per course
-- **Prerequisites**: Database Management Systems for MAD I
 
 ## �️ Tech Stack
 
